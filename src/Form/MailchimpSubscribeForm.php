@@ -2,27 +2,26 @@
 
 /**
  * @file
- * Contains \Drupal\simple_mailchimp\Form\MailchimpSignUpForm.
+ * Contains \Drupal\simple_mailchimp\Form\MailchimpSubscribeForm.
  */
 
 namespace Drupal\simple_mailchimp\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use GuzzleHttp\Exception\ClientException;
 
 /**
- * Class MailchimpSignUpForm.
+ * Class MailchimpSubscribeForm.
  *
  * @package Drupal\simple_mailchimp\Form
  */
-class MailchimpSignUpForm extends FormBase {
+class MailchimpSubscribeForm extends FormBase {
   
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'mailchimp_sign_up_form';
+    return 'mailchimp_subscribe_form';
   }
 
   /**
@@ -35,13 +34,13 @@ class MailchimpSignUpForm extends FormBase {
       '#size' => '22',
       '#required' => TRUE,
       '#attributes' => array(
-        'class' => array('sign-up-input')
+        'class' => array('simple-mailchimp--email-field')
       )
     );
     $form['actions']['submit'] = array(
       '#type' => 'submit',
       '#attributes' => array(
-        'class' => array('sign-up-button')
+        'class' => array('simple-mailchimp--submit-button')
       )
     );
 

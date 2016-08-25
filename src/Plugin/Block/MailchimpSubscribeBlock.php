@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\simple_mailchimp\Plugin\Block\MailchimpSignUpBlock.
+ * Contains \Drupal\simple_mailchimp\Plugin\Block\MailchimpSubscribeBlock.
  */
 
 namespace Drupal\simple_mailchimp\Plugin\Block;
@@ -11,14 +11,14 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Provides a 'MailchimpSignUpBlock' block.
+ * Provides a 'MailchimpSubscribeBlock' block.
  *
  * @Block(
- *  id = "mailchimp_sign_up_block",
- *  admin_label = @Translation("Mailchimp Sign Up Block"),
+ *  id = "mailchimp_subscribe_block",
+ *  admin_label = @Translation("Mailchimp Subscribe Block"),
  * )
  */
-class MailchimpSignUpBlock extends BlockBase {
+class MailchimpSubscribeBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
@@ -39,13 +39,13 @@ class MailchimpSignUpBlock extends BlockBase {
     $form['email_placeholder'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Email Placeholder'),
-      '#default_value' => isset($this->configuration['email_placeholder']) ? $this->configuration['email_placeholder'] : 'wolfie@example.com',
+      '#default_value' => isset($this->configuration['email_placeholder']) ? $this->configuration['email_placeholder'] : 'example@example.com',
       '#maxlength' => 255,
     );
     $form['button_label'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Button Label'),
-      '#default_value' => isset($this->configuration['button_label']) ? $this->configuration['button_label'] : $this->t('Sign Up'),
+      '#default_value' => isset($this->configuration['button_label']) ? $this->configuration['button_label'] : $this->t('Subscribe'),
       '#maxlength' => 255,
     );
 
@@ -69,7 +69,7 @@ class MailchimpSignUpBlock extends BlockBase {
    */
   public function build() {
 
-    $form = \Drupal::formBuilder()->getForm('Drupal\simple_mailchimp\Form\MailchimpSignUpForm');
+    $form = \Drupal::formBuilder()->getForm('Drupal\simple_mailchimp\Form\MailchimpSubscribeForm');
 
     $form['email']['#placeholder'] = $this->configuration['email_placeholder'];
     $form['actions']['submit']['#value'] =  $this->configuration['button_label'];
