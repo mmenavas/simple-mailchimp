@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Contains simple_mailchimp.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function simple_mailchimp_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.simple_mailchimp':
+
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides a subscription form to add emails to a mailchimp list.') . '</p>';
+
+      return $output;
+
+    default:
+  }
+}
