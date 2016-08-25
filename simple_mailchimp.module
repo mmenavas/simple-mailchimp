@@ -30,7 +30,7 @@ function simple_mailchimp_help($route_name, RouteMatchInterface $route_match) {
 function simple_mailchimp_theme() {
   return array(
     'simple_mailchimp_subscribe' => array(
-      'variables' => array('heading' => NULL, 'subheading' => NULL, 'form' => NULL),
+      'variables' => array('subheading' => NULL, 'form' => NULL),
     )
   );
 }

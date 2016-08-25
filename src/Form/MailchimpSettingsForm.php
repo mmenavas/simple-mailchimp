@@ -29,7 +29,7 @@ class MailchimpSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'simple_mailchimp.mailchimp',
+      'simple_mailchimp.settings',
     ];
   }
 
@@ -38,11 +38,11 @@ class MailchimpSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
-    $config = $this->config('simple_mailchimp.mailchimp');
+    $config = $this->config('simple_mailchimp.settings');
 
     $form['api_info'] = array(
       '#type' => 'fieldset',
-      '#title' => 'API Information',
+      '#title' => $this->t('API Information'),
     );
     $form['api_info']['api_key'] = array(
       '#type' => 'textfield',

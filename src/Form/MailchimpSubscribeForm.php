@@ -51,6 +51,8 @@ class MailchimpSubscribeForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    //TODO: Move the code below to a service so this functionality can be reused by the Bulk Subscription form.
+
     // Instantiate a Guzzle client
     $client = \Drupal::httpClient();
 

@@ -64,6 +64,7 @@ class MailchimpSubscribeBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
+    $this->configuration['subheading'] = $form_state->getValue('subheading');
     $this->configuration['email_label'] = $form_state->getValue('email_label');
     $this->configuration['email_placeholder'] = $form_state->getValue('email_placeholder');
     $this->configuration['email_description'] = $form_state->getValue('email_description');
