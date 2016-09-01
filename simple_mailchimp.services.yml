@@ -1,0 +1,3 @@
+services:
+  simple_mailchimp.mailchimp_service:
+    class: Drupal\simple_mailchimp\MailchimpService
