@@ -7,6 +7,8 @@
 
 namespace Drupal\simple_mailchimp\Form;
 
+use Drupal\simple_mailchimp\MailchimpService;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -17,6 +19,18 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class MailchimpSubscribeForm extends FormBase {
   
+  /**
+   * @var \Drupal\simple_mailchimp\MailchimpService
+   */
+  protected $mailchimpService;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(MailchimpService $mailchimpService) {
+    $this->mailchimpService = $mailchimpService;
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -47,11 +61,20 @@ class MailchimpSubscribeForm extends FormBase {
     return $form;
   }
 
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('simple_mailchimp.mailchimp_service')
+    );
+  }
+
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     //TODO: Move the code below to a service so this functionality can be reused by the Bulk Subscription form.
+
+    $subscriber_email = strtolower(trim($form['email']['#value']));
+    $this->mailchimpService->subscribeEmail($subscriber_email);
 
     // Instantiate a Guzzle client
     $client = \Drupal::httpClient();
