@@ -1,0 +1,7 @@
+access simple_mailchimp settings:
+  title: 'Access settings'
+  restrict access: false
+
+access simple_mailchimp bulk subscribe:
+  title: 'Access bulk subscription'
+  restrict access: false
