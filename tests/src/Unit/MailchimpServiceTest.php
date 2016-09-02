@@ -22,7 +22,23 @@ class MailchimpServiceTest extends UnitTestCase {
 
   // Setup mailchimp service
   public function setUp() {
-    $this->mailchimpService = new \Drupal\simple_mailchimp\MailchimpService();
+
+    // create mock config
+    $this->config = $this->getMockBuilder('\Drupal\Core\Config\ConfigFactory')
+      ->disableOriginalConstructor()
+      ->getMock();
+
+    $this->config->expects($this->any())
+      ->method('get')
+      ->with('key.default_config')
+      ->willReturn($this->config); 
+    // create mock http client
+
+    $this->http_client = $this->getMockBuilder('\GuzzleHttp\ClientInterface')
+      ->disableOriginalConstructor()
+      ->getMock();
+
+    $this->mailchimpService = new \Drupal\simple_mailchimp\MailchimpService($this->config, $this->http_client);
   }
 
   public function testValidEmailSubscribe() {
