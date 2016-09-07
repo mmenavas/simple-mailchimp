@@ -8,24 +8,25 @@
 namespace Drupal\simple_mailchimp;
 
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
-use Drupal\Core\Config\ConfigFactory;
+use Drupal\Core\Config\ImmutableConfig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Response;
 
 class MailchimpService implements ContainerInjectionInterface {
 
   protected $client;
   protected $config;
 
-  public function __construct(ConfigFactory $config, ClientInterface $http_client) {
+  public function __construct(ClientInterface $http_client, ImmutableConfig $config) {
     $this->client = $http_client;
     $this->config = $config;
   }
 
   public static function create(ContainerInterface $container) {
     return new static(
-      \Drupal::config('simple_mailchimp.mailchimp'),
-      $container->get('http_client')
+      $container->get('http_client'),
+      $container->get('simple_mailchimp.config')
     );
   }
 
@@ -48,8 +49,12 @@ class MailchimpService implements ContainerInjectionInterface {
       ]);
     }
     catch(\Exception $e) {
-
+      $response = new Response(400);
     }
+
     return $response;
   }
 }
+
+
+

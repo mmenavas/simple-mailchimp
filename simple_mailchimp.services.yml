@@ -1,3 +1,9 @@
 services:
   simple_mailchimp.mailchimp_service:
     class: Drupal\simple_mailchimp\MailchimpService
+    arguments: ['@http_client', '@simple_mailchimp.config']
+
+  simple_mailchimp.config:
+    class: Drupal\Core\Config\ImmutableConfig
+    factory: config.factory:get
+    arguments: ['simple_mailchimp.mailchimp']
